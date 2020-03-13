@@ -25,4 +25,4 @@ routes.get('/users', Users.Validation);
 routes.post('/users', Users.createUser);
 routes.delete('/users', Users.deleteUser);
 
-module.exports = routes;
+module.exports = routes;    //Exportando
