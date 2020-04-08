@@ -46,11 +46,11 @@ routes.post('/update_data', celebrate({
         Digital: Joi.array()
                 .items(Joi.object().keys({
                     type: Joi.string().length(1).required(),
-                    state: Joi.string().min(4).max(5).required(),
+                    state: Joi.boolean().required(),
                     pin: Joi.string().max(3).required()
                 })
         ),
-        Analog: Joi.array().items(Joi.object.keys({
+        Analog: Joi.array().items(Joi.object().keys({
             type: Joi.string().length(1).required(),
             value: Joi.string().min(1).max(5).required(),
             pin: Joi.string().max(3).required()
@@ -61,7 +61,7 @@ routes.post('/update_data', celebrate({
 routes.get('/users/list', Users.IndexUser);
 
 
-routes.get('/users', Users.Validation);
+routes.get('/users', ce,Users.Validation);
 routes.post('/users', Users.createUser);
 routes.delete('/users', Users.deleteUser);
 
