@@ -31,7 +31,7 @@ routes.post('/devices', celebrate({
 routes.post('/update_devices', IoTDevice.update);
 
 routes.delete('/delete_devices', celebrate({
-    [Segments.BODY]: Joi.object.keys({
+    [Segments.BODY]: Joi.object().keys({
         DeviceID: Joi.string().required(),
         DeviceName: Joi.string().required(),
         ambient: Joi.string().required(),
@@ -40,7 +40,23 @@ routes.delete('/delete_devices', celebrate({
 
 
 
-routes.post('/update_data', IoTData.DataIotUpdate);
+routes.post('/update_data', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        DeviceID: Joi.string().required(),
+        Digital: Joi.array()
+                .items(Joi.object().keys({
+                    type: Joi.string().length(1).required(),
+                    state: Joi.string().min(4).max(5).required(),
+                    pin: Joi.string().max(3).required()
+                })
+        ),
+        Analog: Joi.array().items(Joi.object.keys({
+            type: Joi.string().length(1).required(),
+            value: Joi.string().min(1).max(5).required(),
+            pin: Joi.string().max(3).required()
+        }))
+    })
+}),IoTData.DataIotUpdate);
 
 routes.get('/users/list', Users.IndexUser);
 
