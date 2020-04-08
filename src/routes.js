@@ -1,5 +1,5 @@
 const { Router } = require('express');    //Conjunto de modulos backend
-const path = require('path')
+const path = require('path');
 
 //Todos os modelos do servidos
 const IoTDevice = require('./controllers/WebClient/DevicesController');
@@ -12,7 +12,7 @@ const routes = Router();
 
 //Caminhos e suas respectivas funcões (requisição, resposta)
 
-routes.get('/', (request, response) => 
+routes.get('/', (request, response) => response.sendFile(path.join(__dirname, '/pages/HelloPage.html')));
 
 routes.get('/devices', IoTDevice.index);
 routes.post('/devices', IoTDevice.store);
