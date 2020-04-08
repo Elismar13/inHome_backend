@@ -58,11 +58,30 @@ routes.post('/update_data', celebrate({
     })
 }),IoTData.DataIotUpdate);
 
-routes.get('/users/list', Users.IndexUser);
 
 
-routes.get('/users', ce,Users.Validation);
-routes.post('/users', Users.createUser);
+routes.get('/users/list', celebrate({
+    [Segments.HEADERS]: Joi.object({
+        id: Joi.string().required()
+    }).unknown()
+}),Users.IndexUser);
+
+
+routes.get('/users', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        Username: Joi.string().required(),
+        Password: Joi.string().required()
+    })
+}),Users.Validation);
+
+routes.post('/users', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        Username: Joi.string().required(),
+        Password: Joi.string().required(),
+        ProfileImage: Joi.string().uri().required(),
+    })
+}),Users.createUser);
+
 routes.delete('/users', Users.deleteUser);
 
 module.exports = routes;   
