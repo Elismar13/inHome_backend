@@ -8,7 +8,7 @@ module.exports = {
     
         const location = {
             type: 'Point',
-            coordinates: [longitude, latitude]
+            coordinates: [latitude, longitude]
         };
     
         if(!Device) {
@@ -17,9 +17,9 @@ module.exports = {
                 DeviceNAME: DeviceNAME,
                 ambient: ambient,
                 location,
-                Sensors: {
-                    Analog: [],
-                    Digital: [],
+                sensors: {
+                    analog: [],
+                    digital: [],
                 }
             });
         }
