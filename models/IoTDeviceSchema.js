@@ -2,20 +2,20 @@ const mongoose = require('mongoose');
 const PointSchema = require('./PointSchema');
 
 const IoTDeviceSchema = new mongoose.Schema({
-    DeviceUser: String,
-    DeviceID: String,
-    DeviceNAME: String,
+    device_user: String,
+    device_id: String,
+    device_name: String,
     ambient: String,
     location: {
         type: PointSchema,
         index: '2dsphere',
     },
     Sensors: {
-        Digital: [Object],
-        Analog: [Object],
+        digital: [Object],
+        analog: [Object],
     },
-    Atuatores: {
-        State: [Object]
+    atuadores: {
+        state: [Object]
     }
 });
 
