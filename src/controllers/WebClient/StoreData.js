@@ -3,18 +3,18 @@ const IoTDevice = require('../../models/IoTDeviceSchema');
 module.exports = {
     async store(request, response) {
         //console.log(request.body);
-        const { DeviceID, DeviceNAME, ambient, latitude, longitude } = request.body;
-        let Device = await IoTDevice.findOne( { DeviceID } );
+        const { device_id, device_name, ambient, latitude, longitude } = request.body;
+        let device = await IoTDevice.findOne( { device_id } );
     
         const location = {
             type: 'Point',
             coordinates: [latitude, longitude]
         };
     
-        if(!Device) {
-            Device = await IoTDevice.create({
-                DeviceID: DeviceID,
-                DeviceNAME: DeviceNAME,
+        if(!device) {
+            device = await IoTDevice.create({
+                device_id,
+                device_name: device_name,
                 ambient: ambient,
                 location,
                 sensors: {
@@ -24,7 +24,7 @@ module.exports = {
             });
         }
         
-        return response.json(Device);
+        return response.json(device);
     }
 }
 

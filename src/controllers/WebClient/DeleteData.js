@@ -2,11 +2,11 @@ const IoTDevice = require('../../models/IoTDeviceSchema');
 
 module.exports = {
     async Delete(request, response) {
-        const { DeviceID, DeviceNAME, ambient } = request.body;
+        const { device_id, device_name, ambient } = request.body;
         let device = IoTDevice.deleteOne({
-            DeviceID: DeviceID,
-            DeviceNAME: DeviceNAME,
-            ambient: ambient
+            device_id,
+            device_name,
+            ambient
         }, 
         () => { return response.json() });
 

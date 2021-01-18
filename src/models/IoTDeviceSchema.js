@@ -13,12 +13,12 @@ const IoTDeviceSchema = new mongoose.Schema({
         type: PointSchema,
         index: '2dsphere',
     },
-    Sensors: {
-        Digital: [Object],
-        Analog: [Object],
+    sensors: {
+        digital: [Object],
+        analog: [Object],
     },
-    Atuatores: {
-        State: [Object]
+    atuatores: {
+        state: [Object]
     }
 });
 

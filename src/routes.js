@@ -1,6 +1,6 @@
 const { Router } = require('express');    //Conjunto de modulos backend
 const path = require('path');
-const {celebrate, Segments, Joi} = require('celebrate');
+const { celebrate, Segments, Joi } = require('celebrate');
 
 //Todos os modelos do servidos
 const IoTDevice = require('./controllers/WebClient/DevicesController');
@@ -20,11 +20,11 @@ routes.get('/devices',IoTDevice.index);
 
 routes.post('/devices', celebrate({
     [Segments.BODY]: Joi.object().keys({
-        DeviceID: Joi.string().required(), 
-        DeviceNAME: Joi.string().required(), 
+        device_id: Joi.string().required(), 
+        device_name: Joi.string().required(), 
         ambient: Joi.string().required(), 
-        latitude: Joi.string().required(), 
-        longitude: Joi.string().required()
+        latitude: Joi.number().required(), 
+        longitude: Joi.number().required()
     })
 }), IoTDevice.store);
 
@@ -32,8 +32,8 @@ routes.post('/update_devices', IoTDevice.update);
 
 routes.delete('/delete_devices', celebrate({
     [Segments.BODY]: Joi.object().keys({
-        DeviceID: Joi.string().required(),
-        DeviceName: Joi.string().required(),
+        device_id: Joi.string().required(),
+        device_name: Joi.string().required(),
         ambient: Joi.string().required(),
     })
 }),IoTDevice.Delete);
@@ -42,15 +42,15 @@ routes.delete('/delete_devices', celebrate({
 
 routes.post('/update_data', celebrate({
     [Segments.BODY]: Joi.object().keys({
-        DeviceID: Joi.string().required(),
-        Digital: Joi.array()
+        device_id: Joi.string().required(),
+        digital: Joi.array()
                 .items(Joi.object().keys({
                     type: Joi.string().length(1).required(),
                     state: Joi.boolean().required(),
                     pin: Joi.string().max(3).required()
                 })
         ),
-        Analog: Joi.array().items(Joi.object().keys({
+        analog: Joi.array().items(Joi.object().keys({
             type: Joi.string().length(1).required(),
             value: Joi.string().min(1).max(5).required(),
             pin: Joi.string().max(3).required()
