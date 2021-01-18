@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const PointSchema = require('./PointSchema');
 
 const IoTDeviceSchema = new mongoose.Schema({
-    DeviceUser: String,
-    DeviceID: String,
-    DeviceNAME: String,
+    device_user: String,
+    device_id: String,
+    device_name: String,
     description: String,
     ambient: String,
     status: String,
@@ -22,4 +22,4 @@ const IoTDeviceSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Device", IoTDeviceSchema);
+module.exports = mongoose.model("device", IoTDeviceSchema);
