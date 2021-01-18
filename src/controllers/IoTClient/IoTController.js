@@ -1,5 +1,7 @@
-const { dataUpdate } = require('./Update_IoTData');
+const { store } = require('./StoreData');
+const { index } = require('./IndexData');
 
 module.exports = {
-    dataUpdate,
+    index,
+    store,
 }
