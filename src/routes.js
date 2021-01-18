@@ -28,19 +28,18 @@ routes.post('/devices', celebrate({
     })
 }), IoTDevice.store);
 
-routes.post('/update_devices', IoTDevice.update);
+routes.post('/devices', IoTDevice.update);
 
-routes.delete('/delete_devices', celebrate({
+routes.delete('/devices', celebrate({
     [Segments.BODY]: Joi.object().keys({
         device_id: Joi.string().required(),
         device_name: Joi.string().required(),
         ambient: Joi.string().required(),
     })
-}),IoTDevice.Delete);
+}),IoTDevice.deleteData);
 
 
-
-routes.post('/update_data', celebrate({
+routes.post('/devices/update_data', celebrate({
     [Segments.BODY]: Joi.object().keys({
         device_id: Joi.string().required(),
         digital: Joi.array()
@@ -56,7 +55,7 @@ routes.post('/update_data', celebrate({
             pin: Joi.string().max(3).required()
         }))
     })
-}),IoTData.DataIotUpdate);
+}),IoTData.dataUpdate);
 
 
 
@@ -69,19 +68,24 @@ routes.get('/users/list', celebrate({
 
 routes.get('/users', celebrate({
     [Segments.BODY]: Joi.object().keys({
-        Username: Joi.string().required(),
-        Password: Joi.string().required()
+        usename: Joi.string().required(),
+        password: Joi.string().required()
     })
 }),Users.Validation);
 
 routes.post('/users', celebrate({
     [Segments.BODY]: Joi.object().keys({
-        Username: Joi.string().required(),
-        Password: Joi.string().required(),
-        ProfileImage: Joi.string().uri().required(),
+        usename: Joi.string().required(),
+        password: Joi.string().required(),
+        profile_image: Joi.string().uri().required(),
     })
 }),Users.createUser);
 
-routes.delete('/users', Users.deleteUser);
+routes.delete('/users', celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        usename: Joi.string().required(),
+        password: Joi.string().required(),
+    })
+}),Users.deleteUser);
 
 module.exports = routes;   

@@ -14,8 +14,8 @@ module.exports = {
         if(!device) {
             device = await IoTDevice.create({
                 device_id,
-                device_name: device_name,
-                ambient: ambient,
+                device_name,
+                ambient,
                 location,
                 sensors: {
                     analog: [],

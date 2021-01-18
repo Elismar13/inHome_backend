@@ -1,7 +1,7 @@
 const IoTDevice = require('../../models/IoTDeviceSchema');
 
 module.exports = {
-    async DataIotUpdate(request, response) {
+    async dataUpdate(request, response) {
         const { DeviceID, digital, analog } = request.body;
         let device = await IoTDevice.find({ DeviceID });
 

@@ -6,11 +6,11 @@
 const { store } = require('./StoreData');
 const { index } = require('./ListData');
 const { update } = require('./UpdateData');
-const { Delete } = require('./DeleteData');
+const { deleteData } = require('./DeleteData');
 
 module.exports = {
     store, 
     index,
     update,
-    Delete,
+    deleteData,
 }

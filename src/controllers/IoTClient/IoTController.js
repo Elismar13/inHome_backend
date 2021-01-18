@@ -1,5 +1,5 @@
-const { DataIotUpdate } = require('./Update_IoTData');
+const { dataUpdate } = require('./Update_IoTData');
 
 module.exports = {
-    DataIotUpdate,
+    dataUpdate,
 }
