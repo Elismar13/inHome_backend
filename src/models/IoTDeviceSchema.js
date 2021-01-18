@@ -13,13 +13,6 @@ const IoTDeviceSchema = new mongoose.Schema({
         type: PointSchema,
         index: '2dsphere',
     },
-    sensors: {
-        digital: [Object],
-        analog: [Object],
-    },
-    atuatores: {
-        state: [Object]
-    }
 });
 
 module.exports = mongoose.model("device", IoTDeviceSchema);
