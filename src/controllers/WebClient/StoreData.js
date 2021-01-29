@@ -3,7 +3,7 @@ const IoTDevice = require('../../models/IoTDeviceSchema');
 module.exports = {
     async store(request, response) {
         const { device_id, device_name, device_user, description, ambient, latitude, longitude } = request.body;
-        let device = await IoTDevice.findOne({ device_id });
+        let device = await IoTDevice.findOne({ device_name, device_id, device_user });
 
         const location = {
             type: 'Point',
@@ -20,9 +20,10 @@ module.exports = {
                 location,
                 updated_at: Date.now(),
             });
+            return response.json(device);
         }
+        return response.json({}).status(203);
         
-        return response.json(device);
     }
 }
 
