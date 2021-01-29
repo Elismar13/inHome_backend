@@ -16,9 +16,11 @@
     "dotnet": "^1.1.4",
     "express": "^4.17.1",
     "mongoose": "^5.8.9",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "socket.io": "^3.1.0"
   },
   "devDependencies": {
+    "@types/socket.io": "^2.1.13",
     "nodemon": "^2.0.7"
   }
 }
