@@ -1,5 +1,6 @@
 const IoTDataSchema = require('../../models/IoTDataSchema');
 const IoTDevice = require('../../models/IoTDeviceSchema');
+const { sendDataToAllClients } = require('../../WebSocket');
 
 module.exports = {
     async store(request, response) {
@@ -14,6 +15,7 @@ module.exports = {
                 sensors,
                 updated_at: Date.now(),
             });
+            sendDataToAllClients(iot_data);
             return response.json(iot_data);
         }
         return response.status(203);
