@@ -1,21 +1,22 @@
 const UserSchema = require('../../models/UserSchema');
+const { generateNewToken } = require('../auth/TokenGenerator');
 
 module.exports = {
     async createUser(request, response) {
-        const { Username, Password, ProfileImage } = request.body;
+        const { username, password, profile_image } = request.body;
 
-        let User = await UserSchema.findOne( { Username });
-        if(!User) {
-            User = await UserSchema.create({ 
-                Username:Username,
-                Password:Password,
-                ProfileImage:ProfileImage,
+        let user = await UserSchema.findOne( { username });
+        if(!user) {
+            user = await UserSchema.create({ 
+                username:username,
+                password:password,
+                profile_image:profile_image,
             });
-
-            return response.status("201").json(User);
+            const token = generateNewToken(username);
+            return response.status("201").json(token);
         }
 
 
-        return response.status("202").json(User);
+        return response.status("202").json(user);
     }
 }

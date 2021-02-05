@@ -1,15 +1,13 @@
-const UserSchema = require('../../models/UserSchema');
-
 module.exports = {
-    async Validation(request, response) {
-        const { Username, Password } = request.body;
-        console.log(Username, Password);
+    async Validation(request, response, next) {
+        const { username, password } = request.body;
+        console.log(username, password);
 
-        if(Username && Password) {
-            let User = await UserSchema.findOne( {Username} );
-            //console.log("Senha: " +  User.Password)
-            if(User) {
-                if(Password === User.Password) return response.json(User);
+        if(username && password) {
+            let user = await UserSchema.findOne( {username} );
+            //console.log("Senha: " +  User.password)
+            if(user) {
+                if(password === user.password) return response.json(user);
             }
             else {
                 return response.status("401").send("Invalid password");

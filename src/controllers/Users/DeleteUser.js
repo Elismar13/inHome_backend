@@ -2,17 +2,17 @@ const UserSchema = require('../../models/UserSchema');
 
 module.exports = {
     async deleteUser(request, response) {
-        const { Username, Password } = request.body;
+        const { username, password } = request.body;
 
-        let User = await UserSchema.findOne( {Username} );
+        let user = await UserSchema.findOne({ username });
         
-        console.log(User);
+        console.log(user);
 
-        if("Senha", User.Password) {
-            if(User.Password === Password) {
-                let isDeleted = await UserSchema.deleteOne( {Username, Password} )
+        if("Senha", user.password) {
+            if(user.password === password) {
+                let isDeleted = await UserSchema.deleteOne({ username, password })
                 
-                if (isDeleted) return response.status("200").json(User);
+                if (isDeleted) return response.status("200").json(user);
                 else return response.status("202").send("User not found");
             }
         }
