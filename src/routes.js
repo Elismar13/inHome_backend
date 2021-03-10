@@ -42,17 +42,18 @@ routes.post('/devices/data', celebrate({
         device_id: Joi.string().required(),
         device_user: Joi.string().required(),
         device_name: Joi.string().required(),
+        ambient: Joi.string().required(),
         sensors: Joi.array()
                     .items(Joi.object().keys({
                         type: Joi.string().required(),
-                        pin: Joi.string().max(3).required(),
+                        pin: Joi.number().min(0).max(50).required(),
                         state: Joi.boolean(),
-                        value: Joi.string(),
+                        value: Joi.number(),
                     })
                 ),
         actuators: Joi.array()
                     .items(Joi.object().keys({
-                        pin: Joi.string().max(3).required(),
+                        pin: Joi.number().min(0).max(50).required(),
                         state: Joi.boolean().required(),
                     })
                 ),
@@ -70,14 +71,14 @@ routes.get('/users/list', celebrate({
 
 routes.get('/users', celebrate({
     [Segments.BODY]: Joi.object().keys({
-        usename: Joi.string().required(),
+        username: Joi.string().required(),
         password: Joi.string().required()
     })
 }),Users.Validation);
 
 routes.post('/users', celebrate({
     [Segments.BODY]: Joi.object().keys({
-        usename: Joi.string().required(),
+        username: Joi.string().required(),
         password: Joi.string().required(),
         profile_image: Joi.string().uri().required(),
     })
@@ -85,7 +86,7 @@ routes.post('/users', celebrate({
 
 routes.delete('/users', celebrate({
     [Segments.BODY]: Joi.object().keys({
-        usename: Joi.string().required(),
+        username: Joi.string().required(),
         password: Joi.string().required(),
     })
 }),Users.deleteUser);
