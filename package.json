@@ -6,6 +6,7 @@
   "author": "Elismar Silva",
   "license": "MIT",
   "scripts": {
+    "debug":"DEBUG=express:* nodemon src/index.js",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js"
   },
